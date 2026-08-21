@@ -178,17 +178,17 @@
 
 **任务**（每个技能严格按编写规范 §5 骨架，正文目标 ≤ 200 行，超出的示例/探针/模板全文移入 `references/`）
 
-- [ ] `mentor-workspace-init`：判定（标记缺失 / 版本落后 / 当前）→ 目录骨架 → 契约访谈（八类语义）→ 写入 AGENTS.md → 生成 `views/active-context.md` 骨架；**写工作区文件前需用户确认**；永不复制技能；每步落盘断点标记。
-- [ ] `architecture-investigation`：强制 Observation / Inference / Evidence / Principle 四层分离；产出 Experience、来源索引、候选 Insight；禁止把现有实现当正确架构；有学习者行为时才提交候选 Evidence。
-- [ ] `architecture-challenge`：分诊挑战方式（评审/对比/反事实/苏格拉底式等）；保存作答前原题、提示程度、学习者 Artifact 与反馈；只提交候选 Evidence，禁止越过门禁。
-- [ ] `architecture-retrospective`：连接"当时知道什么 → 判断 → 预测 → 结果 → 心智模型修正"；归因检查（不把项目成败全归因于架构判断）；产出 Experience、候选 Evidence、候选 Insight。
-- [ ] `learner-model-calibration`（双职责分区，§8.1）：
+- [x] `mentor-workspace-init`：判定（标记缺失 / 版本落后 / 当前）→ 目录骨架 → 契约访谈（八类语义）→ 写入 AGENTS.md → 生成 `views/active-context.md` 骨架；**写工作区文件前需用户确认**；永不复制技能；每步落盘断点标记。
+- [x] `architecture-investigation`：强制 Observation / Inference / Evidence / Principle 四层分离；产出 Experience、来源索引、候选 Insight；禁止把现有实现当正确架构；有学习者行为时才提交候选 Evidence。
+- [x] `architecture-challenge`：分诊挑战方式（评审/对比/反事实/苏格拉底式等）；保存作答前原题、提示程度、学习者 Artifact 与反馈；只提交候选 Evidence，禁止越过门禁。
+- [x] `architecture-retrospective`：连接"当时知道什么 → 判断 → 预测 → 结果 → 心智模型修正"；归因检查（不把项目成败全归因于架构判断）；产出 Experience、候选 Evidence、候选 Insight。
+- [x] `learner-model-calibration`（双职责分区，§8.1）：
   - Memory Curation：记录准入、生命周期、替代关系、派生视图；可决定合格 Evidence，**不可**提升 Capability State；
   - Learner Model Calibration：用 Evidence 更新 Hypothesis 与 Capability State，执行门禁二；**不可**创造 Evidence；
   - 含写时治理（§8.2 scoped supersession 审计）、写入三分诊（§8.3）、类型敏感更新（§8.4）、检索探针（§8.5）、keep/archive/delete 三组带规模的校准示例（§8.6）、报告契约（不得声称能力状态变化）。
-- [ ] `mentoring-contract-management`：展示 / 比较 / 提案 / 应用契约变更；**应用变更必须用户明确确认**；保存当前版本、生效时间与历史替代关系。
-- [ ] 每个技能 frontmatter：`name`（kebab-case，与目录一致）、英文 `description` 覆盖"何时用 / 做什么 / 何时不用或需用户确认"、`metadata.version`；需确认路径在正文第一条声明"未经确认不执行"。
-- [ ] 技能间用相对链接引用，不复述规则全文；写明"谁拥有哪项判断"（§9）。
+- [x] `mentoring-contract-management`：展示 / 比较 / 提案 / 应用契约变更；**应用变更必须用户明确确认**；保存当前版本、生效时间与历史替代关系。
+- [x] 每个技能 frontmatter：`name`（kebab-case，与目录一致）、英文 `description` 覆盖"何时用 / 做什么 / 何时不用或需用户确认"、`metadata.version`；需确认路径在正文第一条声明"未经确认不执行"。
+- [x] 技能间用相对链接引用，不复述规则全文；写明"谁拥有哪项判断"（§9）。
 
 **交付物**
 
@@ -296,4 +296,5 @@
 - M0 已完成（首次提交 `c22b942`）：决策文档、README 校正、`.gitignore`（projects 边界）、`git init -b main`。
 - M1 已完成（`e6ef66b`）：仓库骨架、`install.mjs` + 冒烟测试（6 项全过）、`agent.cordis.yml`（自官方 `standard` 拷贝裁剪）、`preset.yml`、`VERSION = 0.1.0-rc.1`；真实 DSH 库 `discoverPresets` 验证 `broken: null`，已安装至用户预设根。
 - M2 已完成：工作区模板树 28 个文件（五类记录模板、契约模板、门禁一/二/三映射表、冻结语义、视图模板、`.mentor/workspace.yml`、AGENTS.md 6.5 KB ≤ 16 KB）；门禁字段逐项核对 25/25 覆盖。
-- 人工检查点：等待用户复核 M2 验收标准；通过后进入 M3 技能编写。
+- M3 已完成：6 个 SKILL.md（66–93 行，全部通过 §11 机械自审，见 `m3-skill-self-audit.md`）；本地预设已刷新安装，`discoverPresets` 显示 `broken: null`，技能目录齐备。门禁与写权限内容待人工复核。
+- 下一步：M4 —— 导师身份三层与同源生成。
