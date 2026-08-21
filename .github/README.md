@@ -31,6 +31,14 @@ git push origin v0.1.0-rc.1
 你启用了 npm 2FA 时，**CI 必须使用 Automation token**。
 Classic token（需要 OTP 的那种）在 GitHub Actions 里无法完成 `npm publish`。
 
+## Tag / Release 权限
+
+当前仓库协作者仅有仓库所有者（admin），因此**只有所有者能创建 tag 和 Release**。
+如果以后添加协作者并希望保持"仅所有者可发版"：
+
+- 不要授予协作者 write 权限（只给 read / triage）。
+- 或在 GitHub 设置中为 `v*` 创建 Tag protection rule / Ruleset，并把绕过列表只保留你自己。
+
 ## 可选：关闭 provenance
 
 工作流使用 `npm publish --provenance`。如果不需要发布来源证明，删除 publish 步骤里的 `--provenance`，
