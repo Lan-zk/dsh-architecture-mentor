@@ -16,6 +16,7 @@ import {
   existsSync,
   mkdirSync,
   readFileSync,
+  realpathSync,
   renameSync,
   rmSync,
 } from 'node:fs';
@@ -24,7 +25,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const PRESET_ID = 'architecture-mentor';
-const REPO_ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
+const SCRIPT_PATH = realpathSync(fileURLToPath(import.meta.url));
+const REPO_ROOT = path.dirname(path.dirname(SCRIPT_PATH));
 const SOURCE_DIR = path.join(REPO_ROOT, 'preset');
 
 export function readVersion(dir) {
@@ -137,7 +139,13 @@ export function installPreset(options = {}) {
 
 function isDirectRun() {
   if (!process.argv[1]) return false;
-  return fileURLToPath(import.meta.url) === path.resolve(process.argv[1]);
+  try {
+    // npm global bin entries are symlinks to this file, so compare the real
+    // path of both sides instead of `process.argv[1]` as typed by the shell.
+    return SCRIPT_PATH === realpathSync(path.resolve(process.argv[1]));
+  } catch {
+    return false;
+  }
 }
 
 if (isDirectRun()) {

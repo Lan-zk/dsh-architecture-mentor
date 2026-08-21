@@ -2,7 +2,7 @@
 
 An installable [DSH](https://github.com/deepseek-ai/deepseek-harness) agent preset that turns real engineering work into adaptive architecture-learning experiences. The workspace is not a course: it is a mentor with persistent state, evidence-gated capability calibration, and a lean set of strategy and state skills.
 
-> Status: V1 implemented. npm stable `0.1.1` published. Pilot validation deferred by the owner.
+> Status: V1 implemented. npm stable `0.1.2` published. Pilot validation deferred by the owner.
 
 ## What is included
 
@@ -39,7 +39,7 @@ Then start a DSH session, select the preset named 架构导师, and let `mentor-
 ## Updating an installed preset
 
 ```sh
-npm exec --yes --package=dsh-architecture-mentor@0.1.1 -- architecture-mentor-install
+npm exec --yes --package=dsh-architecture-mentor@0.1.2 -- architecture-mentor-install
 ```
 
 The installer compares `preset/VERSION` with the installed preset. If the package is newer, it backs up the old preset and replaces it; if versions match, it is a no-op. To force a refresh from the same version, remove `~/.dsh/.agent-presets/architecture-mentor` first.

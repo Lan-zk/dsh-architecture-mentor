@@ -2,7 +2,7 @@
 name: architecture-investigation
 description: Use when investigating an unfamiliar codebase, doing code archaeology, reconstructing an architecture decision and its constraints, or researching an open-source system; separates observation, inference, evidence and principle, and produces investigation reports, source indexes, Experience records and candidate Insight. Never treats the current implementation as the correct architecture and never declares learner capability.
 metadata:
-  version: "0.1.1"
+  version: "0.1.2"
 ---
 
 # 调查陌生系统并重建架构事实
