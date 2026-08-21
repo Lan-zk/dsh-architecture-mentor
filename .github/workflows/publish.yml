@@ -44,5 +44,12 @@ jobs:
 
       # Trusted Publishing：npm 通过 OIDC 自动认证，不需要 NODE_AUTH_TOKEN。
       # 前置条件：npm 包 Settings -> Publishing access 已登记本仓库和本 workflow。
+      # 预发布版必须显式 --tag next；正式版默认 latest。
       - name: Publish to npmjs.com
-        run: npm publish --access public --provenance
+        run: |
+          VERSION="$(node -p "require('./package.json').version")"
+          if [[ "$VERSION" == *-* ]]; then
+            npm publish --access public --provenance --tag next
+          else
+            npm publish --access public --provenance
+          fi

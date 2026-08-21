@@ -24,6 +24,7 @@ git push origin v0.1.0-rc.2
 ```
 
 工作流会先校验 `tag == v<version>`，不一致会直接失败。
+预发布版本（如 `0.1.0-rc.2`）会自动发布到 `next` dist-tag；正式版（如 `0.1.0`）发布到 `latest`。
 
 ## 常见失败
 
