@@ -6,6 +6,13 @@
   "bin": {
     "architecture-mentor-install": "scripts/install.mjs"
   },
+  "files": [
+    "preset/",
+    "scripts/install.mjs",
+    "README.md",
+    "README-zh.md",
+    "LICENSE"
+  ],
   "scripts": {
     "smoke": "node scripts/smoke-install.mjs",
     "identity": "node scripts/generate-identity.mjs",
@@ -13,5 +20,24 @@
   },
   "engines": {
     "node": ">=18.17"
+  },
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "architecture",
+    "mentor",
+    "agent",
+    "preset",
+    "learning"
+  ],
+  "license": "MIT",
+  "author": "Lan-zk",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lan-zk/dsh-architecture-mentor.git"
+  },
+  "homepage": "https://github.com/Lan-zk/dsh-architecture-mentor",
+  "bugs": {
+    "url": "https://github.com/Lan-zk/dsh-architecture-mentor/issues"
   }
 }
