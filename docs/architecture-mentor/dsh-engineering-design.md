@@ -130,7 +130,7 @@ dsh-architecture-mentor/
 ## 4. 安装命令设计（已定案：Node 脚本）
 
 - **实现语言：JavaScript（Node ESM，`.mjs`）**。`dsh` 本身是 Node CLI，目标环境必然有 Node——用 JS 天然跨平台，免去 ps1 / sh 双份脚本与平台分支；安装逻辑约百行，无需 TypeScript 构建步骤（若仓库后续引入 TS 工程再迁移不迟）。
-- **分发方式：npm bin**（`package.json` 的 `bin` 指向 `scripts/install.mjs`）。已发布 npmjs.com（正式版 `0.1.0`；rc 测试版由 GitHub Actions 自动发布），已验证命令：
+- **分发方式：npm bin**（`package.json` 的 `bin` 指向 `scripts/install.mjs`）。已发布 npmjs.com（正式版 `0.1.1`；rc 测试版由 GitHub Actions 自动发布），已验证命令：
   - `npm exec --yes --package=dsh-architecture-mentor -- architecture-mentor-install`
   - `npm i -g dsh-architecture-mentor` 后执行 `architecture-mentor-install`
   - 源码运行：`node scripts/install.mjs`
@@ -230,7 +230,7 @@ AGENTS.md **不是全量设计文档的拷贝**，而是常驻的第一层。它
 已确认（含 V1 落地后收口的开放项）：
 
 - 安装路径 = 用户预设根 `$DSH_HOME/.agent-presets/architecture-mentor/`；安装器 = Node 脚本（`.mjs`，无构建步骤），经 npm bin 分发。
-- npm 发布：正式版 `dsh-architecture-mentor@0.1.0` 已发布至 npmjs.com（2026-08-21）；rc 测试版由 GitHub Actions 自动发布，安装命令见 README 与 §4。
+- npm 发布：正式版 `dsh-architecture-mentor@0.1.1` 已发布至 npmjs.com（2026-08-21）；rc 测试版由 GitHub Actions 自动发布，安装命令见 README 与 §4。
 - 导师人格 = 工作区根 `AGENTS.md`，按渐进式披露规划内容（第 6 节）；技能 = 预设内置全集，工作区 `.agents/skills/` 仅作用户覆盖层（rank 200 遮蔽 rank 300）。
 - 初始化不再复制技能；初始化时创建的每个目录自带 README.md 说明职责。
 - 工作区必须为独立 git 项目根；Workspace 存储介质 = Markdown + YAML frontmatter。
@@ -242,7 +242,7 @@ AGENTS.md **不是全量设计文档的拷贝**，而是常驻的第一层。它
 
 V1 后仍开放：
 
-- GitHub Release —— 可选，试点通过后决定；npm `latest` 已指向正式版 `0.1.0`。
+- GitHub Release —— 可选，试点通过后决定；npm `latest` 已指向正式版 `0.1.1`。
 - delegation / `tool-web` 是否随独立 Validator 纳入后续版本。
 
 ## 10. 风险清单

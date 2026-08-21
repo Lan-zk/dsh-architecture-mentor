@@ -2,7 +2,7 @@
 name: architecture-challenge
 description: Use when the mentor chooses a challenge to expose the learner's judgment: a design exercise, architecture review, option comparison, counterfactual or Socratic questioning; fixes the original question and assistance level before the answer, saves the learner's artifacts, and submits candidate Experience and Evidence. Never completes the learner's key reasoning, never promotes Capability State, and never leaks transfer-assessment answers.
 metadata:
-  version: "0.1.0-rc.1"
+  version: "0.1.1"
 ---
 
 # 用挑战暴露学习者判断

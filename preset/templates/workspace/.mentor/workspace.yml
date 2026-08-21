@@ -1,7 +1,7 @@
 # .mentor/workspace.yml —— 工作区标记文件
 # 由 mentor-workspace-init 技能写入与维护；手工不要修改，除非该技能指示。
 schemaVersion: 1
-templateVersion: 0.1.0-rc.1   # 以 preset/VERSION 为准，由 init 写入实际值
+templateVersion: 0.1.1   # 以 preset/VERSION 为准，由 init 写入实际值
 initializedAt: null            # ISO 8601，初始化第一步落盘后填入
 # 断点续跑约定：初始化每完成一步即落盘本文件；重入时按已存在内容继续，
 # 不重复覆盖用户已确认的契约与人格文件。

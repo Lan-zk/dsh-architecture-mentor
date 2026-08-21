@@ -2,7 +2,7 @@
 name: mentor-workspace-init
 description: Use when a workspace has no .mentor/workspace.yml, its templateVersion trails the installed preset, or the user asks to initialize or upgrade an Architecture Mentor workspace; scaffolds the contract, history, memory, mentoring and views directories from preset templates, interviews the user for the mentoring contract, and writes the workspace AGENTS.md and active context. Never writes workspace files without user confirmation and never copies skills into the workspace.
 metadata:
-  version: "0.1.0-rc.1"
+  version: "0.1.1"
 ---
 
 # 初始化或升级架构导师工作区

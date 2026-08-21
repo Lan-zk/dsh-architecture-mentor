@@ -2,7 +2,7 @@
 name: learner-model-calibration
 description: Use when maintaining long-term memory or calibrating the learner model: triage candidate observations, run scoped supersession audits, admit Experience, Evidence and Insight, update lifecycles and derived views, or update Hypotheses and Capability States. Enforces Gate 1 (writing long-term Evidence) and Gate 2 (promoting Capability State) as template fields plus checklists, and requires user review before either takes effect. Never invents evidence and never promotes capability from curation alone.
 metadata:
-  version: "0.1.0-rc.1"
+  version: "0.1.1"
 ---
 
 # 维护长期记忆并校准学习者模型

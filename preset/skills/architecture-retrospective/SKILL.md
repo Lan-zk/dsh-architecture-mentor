@@ -2,7 +2,7 @@
 name: architecture-retrospective
 description: Use when reviewing an incident, migration, refactor or long-term consequence to connect what the learner knew, decided and predicted with what actually happened; reconstructs the timeline, checks attribution, extracts misconception corrections, and produces Experience, candidate Evidence and candidate Insight. Never turns a single outcome into a general principle and never treats project success as capability proof.
 metadata:
-  version: "0.1.0-rc.1"
+  version: "0.1.1"
 ---
 
 # 把决策、预测与结果连起来复盘

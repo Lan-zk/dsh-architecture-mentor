@@ -20,7 +20,7 @@ V1（M0–M4）已按 [v1-implementation-decisions](./2026-08-21-v1-implementati
 
 安装器契约：只写用户预设根 `$DSH_HOME/.agent-presets/architecture-mentor/`，覆盖前备份，冲突拒绝，绝不触碰 shipped 预设。预设组合从官方 `standard` 拷贝裁剪；delegation / tool-jobs / tool-web 默认关闭。工作区初始化由 `mentor-workspace-init` 执行，写入前需用户确认；技能永不复制进工作区。
 
-发布状态：已通过 GitHub Actions 发布 npm 正式版 `dsh-architecture-mentor@0.1.0` 至 npmjs.com（2026-08-21；此前 rc.1–rc.3 为 CI 测试版），并初始化 GitHub 远程 `github.com/Lan-zk/dsh-architecture-mentor`（提交已推送）。安装命令见根 README 与 `dsh-engineering-design.md` §4。
+发布状态：已通过 GitHub Actions 发布 npm 正式版 `dsh-architecture-mentor@0.1.1` 至 npmjs.com（2026-08-21；此前 rc.1–rc.3 为 CI 测试版，0.1.1 修复了 preset/VERSION 内部版本未同步的问题），并初始化 GitHub 远程 `github.com/Lan-zk/dsh-architecture-mentor`（提交已推送）。安装命令见根 README 与 `dsh-engineering-design.md` §4。
 
 ## Alternatives considered
 
@@ -32,5 +32,5 @@ V1（M0–M4）已按 [v1-implementation-decisions](./2026-08-21-v1-implementati
 
 - 仓库具备完整 V1：安装器、预设组合、模板、技能、身份同源生成。
 - 人工复核流程被跳过，以机械自审为当前验收证据；试点时用真实行为补验。
-- M5 试点延后；npm 正式版 `0.1.0` 已通过 CI 发布；GitHub Release 仍延后（可选），触发条件保留在 docs/architecture-mentor/README.md 与实施计划相关记录中。
+- M5 试点延后；npm 正式版 `0.1.1` 已通过 CI 发布；GitHub Release 仍延后（可选），触发条件保留在 docs/architecture-mentor/README.md 与实施计划相关记录中。
 - 后续维护按 `.agents/AGENTS.md` 规则：docs/ 只留设计基线，实施记录进 notes。

@@ -2,7 +2,7 @@
 
 一个可安装的 [DSH](https://github.com/deepseek-ai/deepseek-harness) 智能体预设：把真实工程工作转化为自适应架构学习体验。工作区不是课程，而是一个拥有持续状态的导师系统，通过证据门禁校准能力状态，并配有一套精简的策略技能与状态技能。
 
-> 状态：V1 已落地；npm 正式版 `0.1.0` 已发布。试点验证由仓库所有者延后。
+> 状态：V1 已落地；npm 正式版 `0.1.1` 已发布。试点验证由仓库所有者延后。
 
 ## 包含内容
 
@@ -35,6 +35,15 @@ node scripts/install.mjs
 ```
 
 然后启动 DSH 会话，选择名为"架构导师"的预设，让 `mentor-workspace-init` 初始化学习工作区。
+
+## 更新已安装的预设
+
+```sh
+npm exec --yes --package=dsh-architecture-mentor@0.1.1 -- architecture-mentor-install
+```
+
+安装器会比较 `preset/VERSION` 与已安装版本：包更新则备份旧预设并替换，版本相同则为 no-op。
+若想强制刷新同版本，先删除 `~/.dsh/.agent-presets/architecture-mentor` 再执行。
 
 ## 仓库布局
 

@@ -2,7 +2,7 @@
 name: mentoring-contract-management
 description: Use when displaying, comparing, proposing or applying a Mentoring Contract change; renders the current contract, diffs proposed versions, separates mentor proposals from user decisions, and applies a new version with its history and supersession chain. Never applies any contract change without explicit user confirmation and never evaluates learner capability.
 metadata:
-  version: "0.1.0-rc.1"
+  version: "0.1.1"
 ---
 
 # 管理导师契约及其变更
