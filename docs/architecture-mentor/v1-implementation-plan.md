@@ -140,7 +140,7 @@
 
 **任务**
 
-- [ ] `preset/templates/workspace/` 按 Workspace 目录设计生成：
+- [x] `preset/templates/workspace/` 按 Workspace 目录设计生成：
   - `contract/current.md` + `contract/history/`；
   - `history/{sessions,projects,artifacts,sources}`；
   - `memory/{experiences,evidence,learner-model/{hypotheses,capabilities},insights}`；
@@ -148,16 +148,16 @@
   - `views/{active-context,challenged,archived,indexes}`；
   - `.agents/skills/README.md`（用户覆盖层说明，占位）；
   - `.gitignore`（含 `AGENTS.local.md`）。
-- [ ] 每个目录自带 README（≤ 约 10 行）：职责、主要写入者、记录命名与模板约定、生命周期要点、"什么不该放这里"；README 是导航说明，权威规则留在 AGENTS.md 与技能。
-- [ ] 记录模板 = 门禁载体（编写规范 §7.2 字段定稿）：
+- [x] 每个目录自带 README（≤ 约 10 行）：职责、主要写入者、记录命名与模板约定、生命周期要点、"什么不该放这里"；README 是导航说明，权威规则留在 AGENTS.md 与技能。
+- [x] 记录模板 = 门禁载体（编写规范 §7.2 字段定稿）：
   - `evidence`：`experience_ref`、`artifact_ref`、`observed_behavior`、`context`、`assistance_level`、`supports_or_contradicts`、`counterevidence`、`future_decision_value`、`re_evaluable_source` 必填，1:1 承接门禁一；
-  - `capability`：`capability_dimension`、`evidence_refs`、`stage`、`strength`、`assistance`、`calibration`、`unresolved_counterevidence`、`unproven_scope`、`supersedes` 必填，1:1 承接门禁二；
+  - `capability`：`capability_dimension`、`evidence_refs`、`stage`、`strength`、`assistance`、`calibration`、`time_stability`、`unresolved_counterevidence`、`unproven_scope`、`supersedes` 必填，1:1 承接门禁二（`time_stability` 为定稿新增字段）；
   - `contract` 版本：`proposed_by`、`reason`、`old_version_ref`、`user_confirmation`、`effective_at`、`supersedes`、`teaching_impact` 必填，1:1 承接门禁三；
   - 补充 `experience`、`hypothesis`、`insight`、`intervention` 模板；
   - 统一 lifecycle 字段（`candidate/active/challenged/superseded/archived`）与冻结字段（`frozen: true`、`archived_at`）。
-- [ ] 模板 README 中放"门禁必答问题 ↔ 必填字段 ↔ 检查清单"映射表（机械可查的追踪表）。
-- [ ] `.mentor/workspace.yml` 标记模板约定：`schemaVersion`、`templateVersion`、`initializedAt`，断点续跑语义（每完成一步即落盘）。
-- [ ] 约束落实：Experience/Evidence 模板不设"解释/结论"字段（事实不可变）；解释类记录（Hypothesis/Capability State/Insight）全部带 `supersedes`/`superseded_by` 引用位。
+- [x] 模板 README 中放"门禁必答问题 ↔ 必填字段 ↔ 检查清单"映射表（机械可查的追踪表）。
+- [x] `.mentor/workspace.yml` 标记模板约定：`schemaVersion`、`templateVersion`、`initializedAt`，断点续跑语义（每完成一步即落盘）。
+- [x] 约束落实：Experience/Evidence 模板不设"解释/结论"字段（事实不可变）；解释类记录（Hypothesis/Capability State/Insight）全部带 `supersedes`/`superseded_by` 引用位。
 
 **交付物**
 
@@ -294,5 +294,6 @@
 ## 11. 执行进度
 
 - M0 已完成（首次提交 `c22b942`）：决策文档、README 校正、`.gitignore`（projects 边界）、`git init -b main`。
-- M1 已完成：仓库骨架、`install.mjs` + 冒烟测试（6 项全过）、`agent.cordis.yml`（自官方 `standard` 拷贝裁剪）、`preset.yml`、`VERSION = 0.1.0-rc.1`；真实 DSH 库 `discoverPresets` 验证 `broken: null`，已安装至用户预设根。
-- 下一步：M2 —— 工作区模板与门禁载体（M2 完成后设人工检查点，再进入 M3）。
+- M1 已完成（`e6ef66b`）：仓库骨架、`install.mjs` + 冒烟测试（6 项全过）、`agent.cordis.yml`（自官方 `standard` 拷贝裁剪）、`preset.yml`、`VERSION = 0.1.0-rc.1`；真实 DSH 库 `discoverPresets` 验证 `broken: null`，已安装至用户预设根。
+- M2 已完成：工作区模板树 28 个文件（五类记录模板、契约模板、门禁一/二/三映射表、冻结语义、视图模板、`.mentor/workspace.yml`、AGENTS.md 草稿 6.5 KB ≤ 16 KB）；字段 grep 自检 25/25。
+- 下一步：**人工检查点（M2 验收）** —— 按下方验收标准复核后，再进入 M3 技能编写。
