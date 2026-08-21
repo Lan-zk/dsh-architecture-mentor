@@ -1,35 +1,34 @@
-# GitHub Actions 自动发布 npm
+# GitHub Actions 自动发布 npm（Trusted Publishing / OIDC）
 
 推送 `v*` tag 时自动发布 `dsh-architecture-mentor` 到 npmjs.com。
 工作流文件：`.github/workflows/publish.yml`。
+本仓库使用 npm **Trusted Publishing (OIDC)**，**不需要 NPM_TOKEN**。
 
 ## 前置配置（只需一次）
 
-1. **创建 npm Automation token**
-   - 打开 [npmjs.com](https://www.npmjs.com/) → 头像 → **Access Tokens** → **Generate New Token**。
-   - Token Type 选择 **Automation**（自动化 token 会绕过 2FA 的 OTP，适合 CI）。
-   - 权限：Read and publish（或粒度授权给 `dsh-architecture-mentor`）。
-2. **把 token 添加到 GitHub 仓库 Secrets**
-   - 仓库 → **Settings** → **Secrets and variables** → **Actions** → **New repository secret**。
-   - Name：`NPM_TOKEN`
-   - Value：粘贴上一步生成的 token。
-3. 仓库 `.npmrc` 已固定 `registry=https://registry.npmjs.org/`，无需额外设置。
+1. 在 npmjs.com 为 `dsh-architecture-mentor` 配置 Trusted Publisher：
+   - 包页面 → **Settings** → **Publishing access** → **Add publisher**
+   - Repository：`Lan-zk/dsh-architecture-mentor`
+   - Workflow：`publish.yml`
+   - Environment：（可选，一般留空）
+2. 确认 `package.json` 的 `repository.url` 指向该 GitHub 仓库（已配置）。
+3. **不需要**在 GitHub 添加 `NPM_TOKEN` secret。
 
 ## 触发方式
 
 推送 `v` 开头的 tag，且 tag 必须等于 `v<package.json 的 version>`：
 
 ```sh
-git tag v0.1.0-rc.1
-git push origin v0.1.0-rc.1
+git tag v0.1.0-rc.2
+git push origin v0.1.0-rc.2
 ```
 
-工作流会先校验 `tag == v<version>`，不一致会直接失败，防止发布错版本。
+工作流会先校验 `tag == v<version>`，不一致会直接失败。
 
-## 2FA 说明
+## 常见失败
 
-你启用了 npm 2FA 时，**CI 必须使用 Automation token**。
-Classic token（需要 OTP 的那种）在 GitHub Actions 里无法完成 `npm publish`。
+- `ENEEDAUTH` / `need auth`：npm 包的 Trusted Publisher 未登记，或登记的 workflow 文件名与 `.github/workflows/publish.yml` 不一致。
+- E404 / `Access token expired`：npm 版本过旧；工作流已加入 `npm install -g npm@latest`。
 
 ## Tag / Release 权限
 
@@ -38,11 +37,6 @@ Classic token（需要 OTP 的那种）在 GitHub Actions 里无法完成 `npm p
 
 - 不要授予协作者 write 权限（只给 read / triage）。
 - 或在 GitHub 设置中为 `v*` 创建 Tag protection rule / Ruleset，并把绕过列表只保留你自己。
-
-## 可选：关闭 provenance
-
-工作流使用 `npm publish --provenance`。如果不需要发布来源证明，删除 publish 步骤里的 `--provenance`，
-并移除 workflow 顶部 `permissions` 中的 `id-token: write` 即可。
 
 ## 发布后验证
 

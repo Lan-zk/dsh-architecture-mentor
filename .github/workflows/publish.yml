@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write # 用于 npm provenance（如不需要可移除该行和 --provenance）
+      id-token: write # npm Trusted Publishing (OIDC) 必需；不使用 NPM_TOKEN
 
     steps:
       - name: Checkout
@@ -21,6 +21,9 @@ jobs:
         with:
           node-version: 22
           registry-url: https://registry.npmjs.org/
+
+      - name: Update npm to latest
+        run: npm install -g npm@latest
 
       - name: Verify tag matches package version
         run: |
@@ -39,7 +42,7 @@ jobs:
           npm run smoke
           npm run check:identity
 
+      # Trusted Publishing：npm 通过 OIDC 自动认证，不需要 NODE_AUTH_TOKEN。
+      # 前置条件：npm 包 Settings -> Publishing access 已登记本仓库和本 workflow。
       - name: Publish to npmjs.com
         run: npm publish --access public --provenance
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
