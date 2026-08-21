@@ -10,6 +10,7 @@
 - `proposed/` —— 提案，尚未实现。
 - `implemented/` —— 已落地，记录 shipped 现实。
 - `rejected/` —— 已否决，仅在仍能防止重复错误时保留。
+- `archived/` —— 已冻结的 implemented note；正文不再修改，仅归档元数据与引用修复。
 
 `class` 从封闭集合取：`process`（工作流/政策）、`architecture`（源码结构）、`feature`（能力）、`simplification`（删减）、`testing`（测试策略）。
 
@@ -28,4 +29,5 @@
 - 每个非平凡变更必须新增或更新对应 note；同一主题先做 supersession 审计。
 - 旧判断不得静默改写：新 note 显式 `supersedes: <相对路径>` 或交叉引用旧 note。
 - 引用一律用相对路径。
+- 归档与审计使用 `.agents/skills/archive-agent-notes` 技能。
 - 不引入 `.i18n.yaml`、不引入脚本校验；本仓库为纯中文单语。
