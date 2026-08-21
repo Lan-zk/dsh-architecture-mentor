@@ -1,0 +1,212 @@
+# The `architecture-mentor` agent preset: an adaptive architecture learning
+# mentor over a real engineering workspace.
+#
+# Derivation: copied from the shipped `standard` preset (dsh 0.1.0-rc.7) and
+# trimmed per docs/architecture-mentor/dsh-engineering-design.md §7.1:
+#   keep    persona, agent-instructions, tool-fs, tool-fs-search, tool-pwsh/bash,
+#           skill-filesystem (customSkillDirs -> preset skills/), tool-skill,
+#           tool-ask-user, tool-todo, tool-goal, plan-mode, compaction.
+#   off     delegation (re-enable for the v2 independent Validator, requires
+#           host backend support), tool-jobs, tool-web.
+#   ban     agent-loop, sandbox/approval rows, host registry providers.
+# Re-check against the deployed `standard` preset on every DSH upgrade.
+#
+# This file is an AGENT-PLANE composition. The roster mounts it ONCE under a
+# standing scope; every session naming it joins by scope parentage, so the
+# tools and prompt sections registered here cover each joined agent while a
+# session's own state stays keyed per Session/Agent inside the plugins. The
+# host composition (`base.cordis.yml` + `web.cordis.yml`) keeps everything a
+# preset must not own: the registries themselves, the sandbox and approval
+# stack, persistence, and the model route.
+#
+# A service row here MUST sit inside a group carrying an `isolate` realm.
+# Without one it publishes into the root realm, where it is process-global —
+# another preset publishing the same name collides, and a host reader would
+# resolve one preset's instance for every session; `dsh-agent-presets` rejects
+# that at mount. `true` means an entry-local realm: this standing mount's own
+# private instance, apart from every other preset's. (A shared label does NOT
+# pool instances — `provide()` throws on the second registration under the
+# same realm symbol; labels join REALMS, and are not what this file needs.)
+
+# ── identity ────────────────────────────────────────────────────────────────
+
+# L0 精简导师身份：仅覆盖工作区 AGENTS.md 尚不存在时的 bootstrap 场景。
+# 初始化完成后以工作区 AGENTS.md 为权威人格（工程化设计 §5.3、§6）。
+# `{{model}}` and `{{cwd}}` resolve from the agent's own route and workspace.
+- id: persona
+  name: '@deepseek-ai/dsh-persona'
+  config:
+    text: |-
+      你是 Architecture Mentor（架构导师），一个拥有持续状态的自适应架构学习导师，运行在 DeepSeek Harness 上。当前工作目录：{{cwd}}。
+
+      长期目标：面对复杂真实系统，帮助学习者逐渐独立做出高质量、可解释、可迁移的架构判断。真实项目是诊断器、实验场和经验来源，不是课程大纲，也不是正确答案。
+
+      控制原则：弱流程 + 强约束。学习活动不由固定流程规定；只有三类高影响动作受强制门禁约束：
+      1. 写入长期 Evidence（学习证据）
+      2. 提升 Capability State（能力状态）
+      3. 修改 Mentoring Contract（导师契约）
+      普通提问、讲解、调查、比较、反事实推演不需要统一流程。
+
+      权力边界：你拥有提出方向、挑战用户和改变教学策略的主动权；用户拥有最终目标、现实约束和否决方向的权力。你的诊断是可证伪假设，不是事实。
+
+      八条记忆不变量：
+      1. 导师判断不是证据。只有学习者行为、项目结果和可验证产出才可能成为证据。
+      2. 所有长期能力判断必须可追溯到 Evidence。
+      3. Evidence 记录发生过什么；解释允许以后被推翻。
+      4. 单次成功不等于掌握；跨场景 Transfer 是高置信度能力证据。
+      5. 工作区里存在某项知识，不代表学习者已经掌握。
+      6. 旧判断不得静默重写，必须明确替代、降级或归档。
+      7. 只有仍会影响未来教学决策的内容保持 Active。
+      8. 记忆的目标不是完整记录过去，而是提高未来导师判断的质量。
+
+      门禁的机械承载：记录模板必填字段 + 技能内检查清单 + git 提交历史。门禁一、二由你自检后交用户复核；门禁三必须获得用户明确确认。禁止以任何方式绕过模板字段或检查清单改变长期状态。
+
+      Bootstrap：若 `.mentor/workspace.yml` 不存在，装载 `mentor-workspace-init` 技能初始化工作区；若存在但 `templateVersion` 落后，先询问用户是否升级。初始化完成后，以工作区根 AGENTS.md 为权威导师人格。
+
+- id: agent-instructions
+  name: '@deepseek-ai/dsh-agent-instructions'
+  config:
+    maxBytes: 65536
+
+# ── shell ───────────────────────────────────────────────────────────────────
+
+# `shell-env` stays in the HOST composition: `apps/cli/src/web.ts` injects it to
+# publish `DSH_WEB_URL`/`DSH_WEB_MODE`, and a host row that injects a service is
+# the criterion for host-plane ownership — injection resolves before any session
+# exists, so there is no agent to key by. Behind a preset realm those variables
+# never reached the model's shell at all. Both shell tools consume the host
+# registry from here; their executors (`bash-sandbox`/`pwsh-sandbox`) are
+# host-plane too.
+- id: tool-bash
+  name: '@deepseek-ai/dsh-tool-bash'
+  disabled: !!js process.platform === 'win32'
+
+- id: tool-pwsh
+  name: '@deepseek-ai/dsh-tool-pwsh'
+  disabled: !!js process.platform !== 'win32'
+
+# ── filesystem ──────────────────────────────────────────────────────────────
+
+# Both register into the host `tools` registry and provide nothing, so
+# they need no realm. The `fs` service and its policy stay in the host.
+- id: tool-fs
+  name: '@deepseek-ai/dsh-tool-fs'
+
+- id: tool-fs-search
+  name: '@deepseek-ai/dsh-tool-fs-search'
+  config:
+    sampleOverCapGlobResults: false
+
+# ── background jobs (off by default) ────────────────────────────────────────
+
+# v1 默认关闭：与 delegation 配套，未来独立 Validator 再评估启用。
+- id: tool-jobs
+  name: '@deepseek-ai/dsh-tool-jobs'
+  disabled: true
+
+# ── skills ──────────────────────────────────────────────────────────────────
+
+# The skill REGISTRY lives in the host composition and is layered per scope:
+# these rows register into THIS preset's layer of it, so they need no realm.
+# `baseUrl` is this preset's own directory; `skills/` resolves wherever the
+# preset is installed (official `cordis` preset pattern).
+- id: skill-filesystem
+  name: '@deepseek-ai/dsh-skill-filesystem'
+  config:
+    customSkillDirs:
+      - !!js "process.getBuiltinModule('node:url').fileURLToPath(new URL('skills/', baseUrl))"
+
+- id: tool-skill
+  name: '@deepseek-ai/dsh-tool-skill'
+
+# ── goals ───────────────────────────────────────────────────────────────────
+
+# Only the model-facing tool. The goal SERVICE, its session driver, and the
+# `/goal` command stay on the host plane: the Gateway serves the goal domain as
+# Remote endpoints whose receiver comes from a generated descriptor, so it
+# resolves `goals` on the host and an entry-local realm here would hide it. The
+# registry is keyed by session anyway, so one host instance serves every
+# session. What a preset chooses is whether its agent can call the goal tool.
+- id: tool-goal
+  name: '@deepseek-ai/dsh-tool-goal'
+
+# ── plan mode ───────────────────────────────────────────────────────────────
+
+# Plan state is per-agent by nature, so an entry-local realm is not a
+# workaround here — it is the correct lifetime.
+- id: planning
+  name: cordis:group
+  group: true
+  isolate:
+    planMode: true
+  config:
+    - id: plan-mode
+      name: '@deepseek-ai/dsh-plan-mode'
+      config:
+        section: |
+              You are in plan mode. Stay in plan mode until exit_plan_mode succeeds or the user switches the session mode. Imperative language to implement changes means plan the implementation, not execute it. A user's conversational agreement — including an answer confirming something you asked — approves nothing and does not end plan mode; fold the confirmed decision into the plan and submit it through exit_plan_mode.
+
+              Explore first. Use non-mutating reads, searches, static analysis, and checks to ground the plan in the actual repository. Do not edit or write files, change configuration, run formatters or code generation that rewrites tracked files, commit, or otherwise carry out the plan. Prefer existing functions and patterns over new machinery.
+
+              The tool catalog stays the same across modes for request-cache stability. These plan-mode rules override any later tool description or guidance that suggests using mutation tools; those tools remain listed to keep the tool catalog unchanged. Do not use todo_write to track this planning phase: it tracks implementation after an approved plan, while the plan itself belongs in exit_plan_mode.
+
+              Resolve discoverable facts by inspection. Use ask_user_question only for user-owned choices or material ambiguity that inspection cannot answer. Do not ask the user where code lives or how current behavior works when you can find out.
+
+              Make the plan decision-complete: state the goal and success criteria; group implementation changes by subsystem; identify public API, schema, and data-flow changes; cover edge cases, failure modes, tests, acceptance criteria, and explicit assumptions. Keep it concise enough to review but detailed enough that another engineer can implement it without making design decisions.
+
+              When ready, call exit_plan_mode with the complete plan markdown, starting with a # title. Make exit_plan_mode the only and final tool call in that assistant response: it presents the plan for approval, and implementation begins only in a later step after approval. Do not paste the final plan as a plain reply or ask "should I proceed?" through prose or ask_user_question. If review rejects it, incorporate the feedback and present again. If the review channel is unavailable or aborted, stay in plan mode and ask the user to switch modes manually; do not proceed with implementation.
+
+# ── compaction ──────────────────────────────────────────────────────────────
+
+# `compaction-basic` reads `toolResultPrune` through `ctx.get`, so the pruner must
+# share this realm rather than sit outside it.
+#
+# `tokenMeter` is deliberately NOT in this realm: the meter stays on the HOST
+# plane, and the rows here resolve that one instance. It takes no configuration,
+# keys every fold by Session, and owns the context-meter projection units the
+# browser reads for every session — behind a realm those units would come and go
+# with whichever presets happen to be mounted. What a preset chooses is whether
+# its agent compacts at all, which is `compaction-basic` below.
+- id: compaction
+  name: cordis:group
+  group: true
+  isolate:
+    compaction: true
+    toolResultPruner: true
+  config:
+    - id: compaction-basic
+      name: '@deepseek-ai/dsh-compaction-basic'
+
+    - id: command-compact
+      name: '@deepseek-ai/dsh-command-compact'
+
+    - id: tool-result-pruner
+      name: '@deepseek-ai/dsh-compaction-tool-result-pruner'
+      config:
+        thresholdChars: 8192
+        headChars: 4096
+        tailChars: 1024
+
+# ── delegation and workflows (off by default) ───────────────────────────────
+
+# v1 不注册 delegation 组。启用条件：宿主后端支持 + 引入独立 Validator
+# 后，按 dsh `standard` 预设的 delegation 组恢复（工程化设计 §7.1、§8）。
+
+# ── remaining model-facing rows ─────────────────────────────────────────────
+
+- id: tool-ask-user
+  name: '@deepseek-ai/dsh-tool-ask-user'
+
+- id: tool-todo
+  name: '@deepseek-ai/dsh-tool-todo'
+  config:
+    allowParallelInProgress: true
+
+# The `web` service and its search provider stay in the host composition; only
+# the model-facing tool is per-session. v1 默认关闭（一手资料检索策略暂缓）。
+- id: tool-web
+  name: '@deepseek-ai/dsh-tool-web'
+  disabled: true
+  config:
+    fetch: false
+    searchTimeoutMs: 60000

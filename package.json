@@ -1,0 +1,15 @@
+{
+  "name": "dsh-architecture-mentor",
+  "version": "0.1.0-rc.1",
+  "description": "Architecture Mentor agent preset for DeepSeek Harness (DSH)",
+  "type": "module",
+  "bin": {
+    "architecture-mentor-install": "scripts/install.mjs"
+  },
+  "scripts": {
+    "smoke": "node scripts/smoke-install.mjs"
+  },
+  "engines": {
+    "node": ">=18.17"
+  }
+}

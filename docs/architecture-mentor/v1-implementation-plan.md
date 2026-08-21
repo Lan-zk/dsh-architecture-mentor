@@ -112,16 +112,16 @@
 
 **任务**
 
-- [ ] 按工程化设计 §3 建目录：`scripts/install.mjs`、`preset/agent.cordis.yml`、`preset/preset.yml`、`preset/VERSION`、`preset/skills/`、`preset/templates/`。
-- [ ] `package.json`：`bin` → `scripts/install.mjs`；纯 Node ESM、零构建、无运行时依赖。
-- [ ] 安装器契约（工程化设计 §4）：
+- [x] 按工程化设计 §3 建目录：`scripts/install.mjs`、`preset/agent.cordis.yml`、`preset/preset.yml`、`preset/VERSION`、`preset/skills/`、`preset/templates/`。
+- [x] `package.json`：`bin` → `scripts/install.mjs`；纯 Node ESM、零构建、无运行时依赖。
+- [x] 安装器契约（工程化设计 §4）：
   - 解析 `DSH_HOME ?? ~/.dsh` → 目标 `$DSH_HOME/.agent-presets/architecture-mentor/`；
   - `VERSION` 比较实现幂等 / 升级；覆盖前备份；
   - 目标已存在但无本仓库 `VERSION` 时拒绝并提示（预设 id 冲突防护）；
   - 绝不触碰 shipped 预设目录（代码路径上不存在任何写 shipped 的分支）。
-- [ ] `agent.cordis.yml` 按 §7.1 从 `standard` 拷贝裁剪：保留 persona、agent-instructions、tool-fs、tool-fs-search、tool-pwsh（Windows）/ tool-bash（其余）、skill-filesystem（`customSkillDirs` → 预设 `skills/`，使用 `baseUrl` 的 `!!js` 表达式）、tool-skill、tool-ask-user、tool-todo、tool-goal、plan-mode、compaction；delegation / tool-jobs / tool-web 默认关闭。
-- [ ] `preset.yml`：`name: 架构导师`、`description`（只影响展示）。
-- [ ] 最小冒烟测试 `scripts/smoke-install.mjs`（或等价 `node --test`）：临时 `DSH_HOME` 下验证复制、幂等、升级备份、冲突拒绝四路径。说明：这是安装器自身的构建期测试，不是门禁脚本，不违反"门禁零脚本"。
+- [x] `agent.cordis.yml` 按 §7.1 从 `standard` 拷贝裁剪：保留 persona、agent-instructions、tool-fs、tool-fs-search、tool-pwsh（Windows）/ tool-bash（其余）、skill-filesystem（`customSkillDirs` → 预设 `skills/`，使用 `baseUrl` 的 `!!js` 表达式）、tool-skill、tool-ask-user、tool-todo、tool-goal、plan-mode、compaction；delegation / tool-jobs / tool-web 默认关闭。
+- [x] `preset.yml`：`name: 架构导师`、`description`（只影响展示）。
+- [x] 最小冒烟测试 `scripts/smoke-install.mjs`（或等价 `node --test`）：临时 `DSH_HOME` 下验证复制、幂等、升级备份、冲突拒绝四路径。说明：这是安装器自身的构建期测试，不是门禁脚本，不违反"门禁零脚本"。
 
 **交付物**
 
@@ -294,4 +294,5 @@
 ## 11. 执行进度
 
 - M0 已完成（首次提交 `c22b942`）：决策文档、README 校正、`.gitignore`（projects 边界）、`git init -b main`。
-- 下一步：M1 —— 仓库骨架 + 安装器 + 预设组合（等待发起指令）。
+- M1 已完成：仓库骨架、`install.mjs` + 冒烟测试（6 项全过）、`agent.cordis.yml`（自官方 `standard` 拷贝裁剪）、`preset.yml`、`VERSION = 0.1.0-rc.1`；真实 DSH 库 `discoverPresets` 验证 `broken: null`，已安装至用户预设根。
+- 下一步：M2 —— 工作区模板与门禁载体（M2 完成后设人工检查点，再进入 M3）。
