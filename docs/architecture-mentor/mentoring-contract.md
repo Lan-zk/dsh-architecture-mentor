@@ -18,7 +18,7 @@ Experience / Evidence / Hypothesis / Capability State / Insight
 
 ## 契约至少需要表达的语义
 
-具体字段格式尚未确定，但契约至少需要能够表达：
+V1 字段格式已由 `preset/templates/workspace/contract/current.md` 定稿（frontmatter 版本字段 + 八节正文）。契约至少需要能够表达：
 
 - **长期目标**：最终希望形成什么架构能力。
 - **当前训练范围**：现阶段优先解决哪一类能力问题，哪些内容暂不投入。

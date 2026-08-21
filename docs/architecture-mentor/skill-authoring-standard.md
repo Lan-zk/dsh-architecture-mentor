@@ -1,6 +1,6 @@
 # 导师 Skill 编写规范
 
-> 状态：proposed（候选规范，尚未在任何 SKILL.md 中实现）。
+> 状态：implemented（已按本规范落地为 `preset/skills/` 下 6 个 SKILL.md；工作区 `.agents/skills/` 覆盖副本同样适用）。
 > 本文把 `projects/dsh/.agents/skills/` 与 `projects/dsh/.agents/notes/` 中观察到的设计手法，转译为架构导师预设 Skill 的编写规则。只借手法，不搬 dsh 的环境绑定实现：pnpm/CI 校验脚本、三语 triplet、路径编码生命周期、`agents/openai.yaml` 均不进入 v1。
 
 ## 1. 目的与适用对象
@@ -20,14 +20,14 @@
 
 ## 2. 本轮已确认的决定
 
-- 先定编写规范，再逐个落地 SKILL.md；当前交付物只有设计文档。
+- 已按本规范落地 6 个 SKILL.md（`preset/skills/`）；后续工作区 `.agents/skills/` 覆盖副本同样适用。
 - 只借 dsh 的设计手法，不搬环境绑定实现。
 - v1 零脚本：三类门禁由记录模板必填字段 + 技能内检查清单承载；校验由导师自检执行、用户复核，git 提交历史作为审计链。
 - `memory-curation` 不拆出独立 Skill，并入 `learner-model-calibration`；该 Skill 必须显式保持两条职责边界（见 §8.1）。
 - 不改变 [Workspace 目录设计](./workspace-directory-design.md) 的结论：生命周期是记录属性，不按生命周期建目录、不移动文件；仅从 dsh 借入**冻结语义**（见 §7.4）。
 - frontmatter 与技能名使用 ASCII（沿用工程化设计 §9）。
 
-尚未决定：SKILL.md 正文语言（中文 / 英文 / 双语）、各技能的最终 description 文本、记录模板字段最终枚举、校准示例与检索探针的具体内容。
+V1 已定稿：正文中文；`description` 为英文 `Use when` 开头；记录模板字段枚举、校准示例与检索探针已落入工作区模板与 `learner-model-calibration`。
 
 ## 3. 编写总原则
 
@@ -51,7 +51,7 @@ description 是唯一始终在场的触发契约，按以下规则写：
 - 描述行为而非知识主题，与"Skill 按认知动作拆分"一致。
 - ASCII 书写；`Use when ...` 开头（dsh 惯例），允许逗号分句枚举触发条件。
 
-触发职责示意（最终文本待定，但边界按此执行）：
+触发职责（最终文本见 `preset/skills/*/SKILL.md`）：
 
 | Skill | 默认可被模型选择 | 需要用户复核 / 确认的路径 |
 | --- | --- | --- |
@@ -283,9 +283,7 @@ lifecycle: active 且无 evidence_ref  # 缺少证据链的活跃解释
 
 观察样本：`projects/dsh/.agents/skills/` 下全部 11 个 SKILL.md（重点：`dsh-archive-agent-notes`、`dsh-code-review`、`dsh-doc-site-sync`、`dsh-prose-standard`、`dsh-trim-cot-leakage`、`dsh-translate-docs`、`dsh-pre-push-checks`）与 `projects/dsh/.agents/notes/`（README.md、archived/AGENTS.md）。借鉴手法清单与来源见 §3 总原则。
 
-## 13. 尚未决定
+## 13. V1 后仍开放
 
-- SKILL.md 正文语言与语体（中文叙述 / 保留 dsh 式高密度英文指令语体 / 双语）。
-- 六个技能的最终 description 文本与触发矩阵定稿。
-- 校准示例、检索探针的具体内容与存放位置。
-- 检查清单的粒度：按门禁一条一组，还是按动作拆开。
+- 正文语体与 description 文本：以 `preset/skills/` 为当前定稿，试点后可修正。
+- 检查清单粒度：当前按技能动作承载；试点后评估是否需要按门禁再拆。

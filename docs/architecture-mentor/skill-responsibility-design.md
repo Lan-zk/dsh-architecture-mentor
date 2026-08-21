@@ -171,14 +171,15 @@ Architecture Investigation
 
 当没有长期状态变更时，不必为了“流程完整”调用 Memory Curation 或 Learner Model Calibration。
 
-## 当前仍未决定
+## 当前仍未决定（V1 已收口部分）
 
-- 七个逻辑职责最终合并成多少个物理 Skill。
-- Architecture Investigation 是否进一步拆分代码调查与决策重建。
-- Transfer Assessment 是否必须由独立 Agent 或校验器执行。
-- Memory Curation 和 Learner Model Calibration 能否由同一 Skill 实现而不产生自我强化。
-- Skill 使用何种输入输出格式提交候选记录。
-- 顶层导师如何计算当前学习优先级和选择策略。
+V1 已决定：七个逻辑职责合并为 6 个物理 SKILL.md（5 策略/状态 + 1 引导）；Memory Curation 与 Learner Model Calibration 合并在 `learner-model-calibration` 中，通过双职责分区避免自我强化；候选记录使用工作区模板的 frontmatter + `lifecycle: candidate` 提交。
+
+仍待真实使用验证：
+
+- Architecture Investigation 是否进一步拆分代码调查与决策重建；
+- Transfer Assessment 是否必须由独立 Agent 或校验器执行（v2）；
+- 顶层导师如何计算当前学习优先级和选择策略；
 - 学习、交付、混合模式如何影响 Skill 行为。
 
 这些未决项应通过少量真实学习任务验证后再确定，不能仅根据目录整齐程度决定。

@@ -1,6 +1,6 @@
 # 架构导师设计文档
 
-本目录沉淀“架构学习技能设计”对话中已经形成共识的设计基线，以及在此基础上推导出的 Memory Model v1（第一版记忆模型）和后续的工程化收敛结论。仍在讨论的项统一在文末开放项清单中标注 v1 状态，不再散落各处。
+本目录沉淀“架构学习技能设计”对话中已经形成共识的设计基线，以及在此基础上推导出的 Memory Model v1（第一版记忆模型）和后续的工程化收敛结论。V1 已按这些设计落地为可安装的 DSH 预设；实施决策与实现记录见 [`.agents/notes/`](../../.agents/notes/README.md)。仍在讨论的项统一在文末开放项清单中标注状态，不再散落各处。
 
 整理时遵循两条规则：
 
@@ -19,13 +19,13 @@
 | [能力与证据模型](./capability-evidence-model.md) | 从接触到迁移的能力阶梯、证据强度和能力状态更新原则 |
 | [长期记忆模型](./memory-model.md) | 原始历史与五类长期记忆的关系、证据链和记忆不变量 |
 | [记忆生命周期与活跃上下文](./memory-lifecycle.md) | 候选、活跃、受质疑、替代、归档，以及工作集预算与遗忘 |
-| [Agent、Skill 与 Workspace 的职责](./agent-skill-workspace.md) | 当前认可的组织方向、责任边界和仍待设计的内容 |
+| [Agent、Skill 与 Workspace 的职责](./agent-skill-workspace.md) | 职责模型与依赖方向；V1 已落地的物理技能集与存储 |
 | [Workspace 目录设计](./workspace-directory-design.md) | 从契约、历史、五类记忆、导师运行记录和派生视图推导出的逻辑目录 |
 | [Skill 职责设计](./skill-responsibility-design.md) | 按认知动作拆分的 Skill 边界、输入输出、禁止项和状态写权限 |
 | [Skill 编写规范](./skill-authoring-standard.md) | 参考 dsh 的设计手法，规定 SKILL.md 的触发契约、正文骨架、零脚本门禁承载与记忆类专项规则 |
 | [DSH 工程化设计](./dsh-engineering-design.md) | 开源安装命令、预设组合、AGENTS.md 导师人格与工作区初始化的工程注意事项（运行时机制已核实） |
-| [v1 实现决策](./v1-implementation-decisions.md) | D1–D11 已确认决策、派生的 v1 硬约束与开放项归宿 |
-| [v1 落地开发计划](./v1-implementation-plan.md) | M0–M4 执行步骤、交付物与验收标准；试点与发布延后 |
+
+实施决策、实现落地与过程自审记录见 [`.agents/notes/`](../../.agents/notes/README.md)。
 
 背景研究见 [《AI 时代软件架构师的深度研究》](../AI时代软件架构师的深度研究.md)。
 
@@ -59,17 +59,14 @@
 - v1 门禁执行：门禁一、二由导师自检 + 用户复核，门禁三必须用户明确确认，git 提交历史为审计链；独立 Validator 后置（《DSH 工程化设计》§8）。
 - 工作区必须是独立 git 项目根（《DSH 工程化设计》§5.4）。
 
-## 尚未确认的实现决策（v1 执行状态）
+## V1 后仍开放
 
-| 开放项 | v1 状态 | 归宿 |
+| 开放项 | 状态 | 归宿 |
 | --- | --- | --- |
 | 完整的架构能力地图及其粒度 | 延后 | 以深度研究 ★★★★★ 条目作种子清单（D7），积累真实 Evidence 后再收敛 |
-| 五类长期记录的最终字段、标识符、引用方式 | 部分决定 | 存储与命名已定（D3）；字段已由记录模板定稿（`preset/templates/workspace/memory/README.md`、`contract/current.md`）；候选来源见《Skill 编写规范》§7.2 |
 | 生命周期状态转换和能力升级所需的具体证据阈值 | 试点验证中 | 试点延后；仍以本目录原则为约束继续收敛 |
-| 三类门禁由谁执行 | 已决定 v1 方式 | 见上文；独立 Validator 后置 |
-| Mentoring Contract 的最终字段，以及学习/交付模式的切换规则 | 部分决定 | v1 契约字段已由模板定稿（`contract/current.md`）；模式切换协议延后 |
+| 学习/交付/混合模式的切换规则 | 延后 | 契约字段出现实际需求后设计 |
 | Active Memory 的容量预算、排序和按需检索机制 | 试点参数 | D6：≤ 8 KB 试点值，试点校准后回写 |
-| v1 逻辑 Skill 合并与最终物理数量 | 已决定 | 见上文（5 + 1） |
-| 如何机械地评估诊断准确性、迁移能力和长期进步 | 保持开放 | 不因 v1 交付节奏而猜测 |
+| 如何机械地评估诊断准确性、迁移能力和长期进步 | 保持开放 | 不因 V1 交付节奏而猜测 |
 
-这些开放项的后续收敛与 v1 决策记录见 [《v1 实现决策》](./v1-implementation-decisions.md)；执行步骤与验收标准见 [《v1 落地开发计划》](./v1-implementation-plan.md)。
+这些开放项的后续收敛记录见 `.agents/notes/`；V1 已决定的实现决策见 [《v1 实现决策》](../../.agents/notes/implemented/process/2026-08-21-v1-implementation-decisions.md)。

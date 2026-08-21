@@ -1,6 +1,6 @@
 # DSH 工程化设计：安装、预设与工作区初始化
 
-> 状态：proposed（候选设计，尚未实现）。
+> 状态：implemented（v1 已按本文落地，实现见 `preset/` 与 `scripts/`；与实现不一致时以代码为准并同步本文）。
 > 本文档中的运行时机制均以 DeepSeek Harness 0.1.0-rc.7 源码核实为准（出处标注到包与文件）；DSH 升级后需复核。
 
 ## 1. 目标与问题澄清
@@ -86,14 +86,19 @@
 
 ```text
 dsh-architecture-mentor/
+├─ .agents/AGENTS.md                # 仓库维护规则
+├─ .agents/notes/                   # Agent Notes：决策与实现记录（精简单语）
 ├─ README.md                          # 安装与快速开始、信任声明
 ├─ LICENSE
 ├─ package.json                       # bin → scripts/install.mjs（npm / pnpm 均可）
 ├─ scripts/install.mjs                # 安装器：纯 Node ESM，无构建步骤
+├─ scripts/smoke-install.mjs          # 安装器冒烟测试
+├─ scripts/generate-identity.mjs      # 身份同源生成器（--check 防漂移）
 ├─ preset/                            # 安装时整体复制到 $DSH_HOME/.agent-presets/architecture-mentor/
 │  ├─ agent.cordis.yml                # 导师组合（见 7.1）
 │  ├─ preset.yml                      # name: 架构导师 / description
 │  ├─ VERSION                         # 模板版本号：安装器与工作区标记共用
+│  ├─ src/mentor-identity.md          # 单一身份源（persona + AGENTS 段）
 │  ├─ skills/                         # 预设内置技能全集（customSkillDirs 指向此处）
 │  │  ├─ mentor-workspace-init/SKILL.md        # 初始化 / 升级工作区
 │  │  ├─ architecture-investigation/SKILL.md   # 策略技能
@@ -206,7 +211,7 @@ AGENTS.md **不是全量设计文档的拷贝**，而是常驻的第一层。它
 ### 7.2 逻辑 Skill → 物理 Skill（全部内置预设）
 
 - 命名候选全集（kebab-case）：`architecture-investigation`、`architecture-challenge`、`architecture-retrospective`、`transfer-assessment`、`learner-model-calibration`、`mentoring-contract-management`。
-- v1 合并与裁剪：`memory-curation` 并入 `learner-model-calibration`（设计文档允许相邻职责合并，须保留输入输出与写权限边界）；`transfer-assessment` 后置到 v2。**v1 交付 5 个物理 Skill，全部随预设分发。**
+- v1 合并与裁剪：`memory-curation` 并入 `learner-model-calibration`（设计文档允许相邻职责合并，须保留输入输出与写权限边界）；`transfer-assessment` 后置到 v2。**v1 交付 6 个物理 SKILL.md：5 个策略/状态技能 + 1 个引导技能 `mentor-workspace-init`，全部随预设分发。**
 - 每个 SKILL.md frontmatter 携带 `metadata: { version }`，供预设升级与工作区覆盖副本的 diff 比对。
 - **用户定制路径**：复制目标技能到 `<workspace>/.agents/skills/<同名>/` 再修改——rank 200 遮蔽预设 rank 300；该副本从此刻起归用户所有，不再随预设升级。
 - 状态写权限表照搬 [《Skill 职责设计》](./skill-responsibility-design.md) 的"状态写权限"一节。
@@ -217,23 +222,24 @@ AGENTS.md **不是全量设计文档的拷贝**，而是常驻的第一层。它
 - git 提交历史 = 审计链；"旧判断不得静默改写"由 append-only 文件 + 显式 `superseded` 引用实现。
 - 校验 v1 由导师执行 + 用户复核；独立 Validator 后置（启用 delegation 后的候选）。
 
-## 9. 已确认 / 尚未决定
+## 9. 已确认 / V1 后仍开放
 
-已确认（本文档新增，相对 README 的开放项）：
+已确认（含 V1 落地后收口的开放项）：
 
 - 安装路径 = 用户预设根 `$DSH_HOME/.agent-presets/architecture-mentor/`；安装器 = Node 脚本（`.mjs`，无构建步骤），经 npm bin 分发（`npx` / `npm i -g` / `pnpm dlx` 均可）。
 - 导师人格 = 工作区根 `AGENTS.md`，按渐进式披露规划内容（第 6 节）；技能 = 预设内置全集，工作区 `.agents/skills/` 仅作用户覆盖层（rank 200 遮蔽 rank 300）。
 - 初始化不再复制技能；初始化时创建的每个目录自带 README.md 说明职责。
 - 工作区必须为独立 git 项目根；Workspace 存储介质 = Markdown + YAML frontmatter。
+- v1 物理技能集 = 6 个 SKILL.md（5 策略/状态 + 1 引导），见 §7.2 与实际 `preset/skills/`。
+- 初始化时 `git init`：提示并引导，经用户确认后执行（见《v1 实现决策》D8）。
+- 契约 v1 字段最终枚举：已由 `preset/templates/workspace/contract/current.md` 与 `memory/README.md` 定稿。
+- delegation / `tool-jobs` / `tool-web`：v1 默认关闭。
+- AGENTS.md 与 Skill 语言策略：frontmatter/`description` ASCII（英文 `Use when`），技能正文中文。
 
-尚未决定：
+V1 后仍开放：
 
-- 发布渠道（npm registry / GitHub Release）。
-- v1 物理技能集最终合并方案（7.2 是候选：5 个）。
-- 初始化时自动 `git init` 还是仅提示。
-- 契约 v1 字段的最终枚举（沿用 mentoring-contract.md 的开放项）。
-- delegation / tool-web 是否纳入 v1。
-- AGENTS.md 与 Skill 的中英文策略（本仓库设计文档为中文；frontmatter 与技能名必须 ASCII）。
+- 发布渠道（npm registry / GitHub Release）——试点通过后决定。
+- delegation / `tool-web` 是否随独立 Validator 纳入后续版本。
 
 ## 10. 风险清单
 
