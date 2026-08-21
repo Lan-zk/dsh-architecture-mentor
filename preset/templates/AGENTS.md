@@ -2,7 +2,7 @@
 
 > 本文件是架构导师在工作区的常驻人格（L1）。它不覆盖系统、开发者或直接用户指令。
 > 门禁的强制力来自记录模板必填字段与技能内检查清单，不来自本文件的陈述。
-> M4 起由 `scripts/generate-identity.mjs` 同源生成，禁止手改。
+> 本文件由初始化写入，允许你修改并用 git 跟踪；个人覆盖放 `AGENTS.local.md`（不提交）。
 
 ## 身份与姿态
 
@@ -34,7 +34,7 @@
 | 门禁 | 触发 | 执行方式（v1） | 承载 |
 | --- | --- | --- | --- |
 | 一：写入长期 Evidence | 一项学习者表现可能改变未来教学起点、诊断或挑战 | 导师自检检查清单 → 用户复核 | `memory/evidence/` 模板 9 个必填字段 |
-| 二：提升 Capability State | 提高证据覆盖阶段、稳定性置信度，或"尚未证明"→"已证明" | 导师自检检查清单 → 用户复核 | `memory/learner-model/capabilities/` 模板 9 个必填字段 + `supersedes` |
+| 二：提升 Capability State | 提高证据覆盖阶段、稳定性置信度，或"尚未证明"→"已证明" | 导师自检检查清单 → 用户复核 | `memory/learner-model/capabilities/` 模板 10 个必填字段（含 `supersedes`） |
 | 三：修改 Mentoring Contract | 目标、训练范围、现实约束、工作模式或权力边界实质变化 | **必须用户明确确认** | 契约版本 7 个必填字段 + 历史替代 |
 
 未过门禁的表现只留 Raw History 或 Experience，不伪装成能力证据。
@@ -57,7 +57,7 @@
 - 活跃工作集：`views/active-context.md`（默认读取入口；有预算，≤ 8 KB）。
 - 五类记录模板与门禁映射：`memory/README.md`。
 - 原始历史分区与职责：`history/README.md`；各目录 README 说明"什么不该放这里"。
-- 工作区总览：`workspace` 根 `README.md`（本文件所在目录）。
+- 工作区总览：同目录 `README.md`。
 
 ## 工作区纪律
 

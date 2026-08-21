@@ -155,12 +155,12 @@ git 提交历史（谁、何时、改了什么；旧记录不静默改写）
 
 校验顺序与 [DSH 工程化设计](./dsh-engineering-design.md) §8 一致：门禁一、二由导师自检（检查清单）后交用户复核；门禁三必须获得用户明确确认。独立 Validator 后置。
 
-### 7.2 字段映射（候选，最终枚举待定）
+### 7.2 字段映射（已定稿，见《v1 实现决策》§3）
 
 | 门禁 | 记录类型 | 候选必填字段 |
 | --- | --- | --- |
 | 一：写入长期 Evidence | evidence | `experience_ref`、`artifact_ref`、`observed_behavior`、`context`、`assistance_level`、`supports_or_contradicts`、`counterevidence`、`future_decision_value`、`re_evaluable_source` |
-| 二：提升 Capability State | capability | `capability_dimension`、`evidence_refs`、`stage`、`strength`、`assistance`、`calibration`、`unresolved_counterevidence`、`unproven_scope`、`supersedes` |
+| 二：提升 Capability State | capability | `capability_dimension`、`evidence_refs`、`stage`、`strength`、`assistance`、`calibration`、`time_stability`、`unresolved_counterevidence`、`unproven_scope`、`supersedes` |
 | 三：修改 Mentoring Contract | contract 版本 | `proposed_by`、`reason`、`old_version_ref`、`user_confirmation`、`effective_at`、`supersedes`、`teaching_impact` |
 
 字段名与取值在记录模板中定义；技能只引用字段，不重新定义。
@@ -287,6 +287,5 @@ lifecycle: active 且无 evidence_ref  # 缺少证据链的活跃解释
 
 - SKILL.md 正文语言与语体（中文叙述 / 保留 dsh 式高密度英文指令语体 / 双语）。
 - 六个技能的最终 description 文本与触发矩阵定稿。
-- 记录模板字段最终枚举（§7.2 为候选）。
 - 校准示例、检索探针的具体内容与存放位置。
 - 检查清单的粒度：按门禁一条一组，还是按动作拆开。

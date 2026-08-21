@@ -53,25 +53,10 @@ Capability State、Architecture Insight。Active Memory 必须少而高价值。
 | 记录旧状态及显式替代 | `supersedes` | □ 指向被替代状态 |
 | 高置信度 Transfer 需跨场景证据 | — | □ `stage: transfer` 时 `strength: cross-context` |
 
-> 定稿说明：`time_stability` 是 M2 定稿时相对《Skill 编写规范》§7.2 候选枚举新增的字段，
-> 用于 1:1 承接门禁二"说明时间稳定性"这一必答要求；其余字段与候选枚举一致。
+> `time_stability` 承接门禁二"说明时间稳定性"这一必答要求。
 
-## 写入三分诊（默认少写）
-
-| 分类 | 判定 | 处理 |
-| --- | --- | --- |
-| 不进入长期记忆 | 对未来教学决策没有可预见影响 | 留在 Raw History |
-| 只写 Experience | 发生了值得追溯的事实，但无可观察学习表现 | 写 Experience |
-| 走 Evidence 门禁 | 有学习者行为、原始产出，可能改变教学起点/诊断/挑战 | 按上方字段与清单执行门禁一 |
-
-## 检索探针（零脚本，先跑再通读）
-
-```text
-lifecycle: candidate|challenged     # 待验证 / 冲突记录
-supersedes:                          # 替代链是否完整
-superseded_by:                       # 是否双向交叉引用
-lifecycle: active 且无 evidence_ref  # 缺少证据链的活跃解释
-```
+执行规则（写入三分诊、写时治理、检索探针）由 `learner-model-calibration` 技能持有；
+本文件只定义模板字段与门禁映射。
 
 ## 模板：Experience（事实单元）
 

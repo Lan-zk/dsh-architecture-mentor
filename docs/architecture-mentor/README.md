@@ -29,7 +29,7 @@
 
 背景研究见 [《AI 时代软件架构师的深度研究》](../AI时代软件架构师的深度研究.md)。
 
-> 注：本文档引用的 `projects/dsh/.agents/` 样本是本地参考材料。按 `projects/README.md` 的约定，`projects/` 下的外部源码副本不进入 git 管理；外部读者可经 npm 包 `@deepseek-ai/dsh` 获取上游源码。
+> 注：本文档引用的 `projects/dsh/.agents/` 样本是本地参考材料，按 `projects/README.md` 的约定不进入 git 管理。样本的规范出处是 dsh 上游仓库（deepseek-harness）：`@deepseek-ai/dsh` 包的 repository 字段指向 `github.com/deepseek-ai/deepseek-harness`。
 
 ## 已确认的设计基线
 
@@ -64,10 +64,10 @@
 | 开放项 | v1 状态 | 归宿 |
 | --- | --- | --- |
 | 完整的架构能力地图及其粒度 | 延后 | 以深度研究 ★★★★★ 条目作种子清单（D7），积累真实 Evidence 后再收敛 |
-| 五类长期记录的最终字段、标识符、引用方式 | 部分决定 | 存储与命名已定（D3）；字段枚举由 M2 记录模板定稿，候选见《Skill 编写规范》§7.2 |
-| 生命周期状态转换和能力升级所需的具体证据阈值 | 试点验证中 | 试点（M5）延后；仍以本目录原则为约束继续收敛 |
+| 五类长期记录的最终字段、标识符、引用方式 | 部分决定 | 存储与命名已定（D3）；字段已由记录模板定稿（`preset/templates/workspace/memory/README.md`、`contract/current.md`）；候选来源见《Skill 编写规范》§7.2 |
+| 生命周期状态转换和能力升级所需的具体证据阈值 | 试点验证中 | 试点延后；仍以本目录原则为约束继续收敛 |
 | 三类门禁由谁执行 | 已决定 v1 方式 | 见上文；独立 Validator 后置 |
-| Mentoring Contract 的最终字段，以及学习/交付模式的切换规则 | 部分决定 | v1 契约字段由 M2 模板定稿；模式切换协议延后 |
+| Mentoring Contract 的最终字段，以及学习/交付模式的切换规则 | 部分决定 | v1 契约字段已由模板定稿（`contract/current.md`）；模式切换协议延后 |
 | Active Memory 的容量预算、排序和按需检索机制 | 试点参数 | D6：≤ 8 KB 试点值，试点校准后回写 |
 | v1 逻辑 Skill 合并与最终物理数量 | 已决定 | 见上文（5 + 1） |
 | 如何机械地评估诊断准确性、迁移能力和长期进步 | 保持开放 | 不因 v1 交付节奏而猜测 |
