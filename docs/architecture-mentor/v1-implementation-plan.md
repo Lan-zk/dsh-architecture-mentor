@@ -91,10 +91,10 @@
 
 **任务**
 
-- [ ] 新建 `docs/architecture-mentor/v1-implementation-decisions.md`，记录 §3 的 D1–D11 及依据；本计划文档作为其配套执行文件。
-- [ ] 校正 `docs/architecture-mentor/README.md` 的开放项清单：已被后续文档关闭的项（如"存储介质 = Markdown + YAML frontmatter"）移入设计基线；仍开放项逐条标注"已决定 / 延后（原因）/ 试点验证中"。
-- [ ] 对仓库根执行 `git init` 并首次提交（当前仓库不是 git 仓库；审计链与"禁止静默重写"依赖 git）。
-- [ ] 明确 `projects/` 下外部源码副本不进 git 管理的边界（遵循 `projects/README.md` 既有约定）。
+- [x] 新建 `docs/architecture-mentor/v1-implementation-decisions.md`，记录 §3 的 D1–D11 及依据；本计划文档作为其配套执行文件。
+- [x] 校正 `docs/architecture-mentor/README.md` 的开放项清单：已被后续文档关闭的项（如"存储介质 = Markdown + YAML frontmatter"）移入设计基线；仍开放项逐条标注"已决定 / 延后（原因）/ 试点验证中"。
+- [x] 对仓库根执行 `git init` 并首次提交（当前仓库不是 git 仓库；审计链与"禁止静默重写"依赖 git）。
+- [x] 明确 `projects/` 下外部源码副本不进 git 管理的边界（遵循 `projects/README.md` 既有约定）。
 
 **交付物**
 
@@ -291,7 +291,7 @@
 - 任务级微调（不影响已确认决策、owning 文档语义与验收标准）：git 提交中说明原因即可；
 - 任何实施与 owning 设计文档发生冲突时：先更新设计文档并记录依据，再改实施，禁止让代码与文档漂移（编写规范 §10）。
 
-## 11. 下一步
+## 11. 执行进度
 
-1. 本计划文件已落盘（即当前文档）。
-2. 等待发起指令后执行 M0：创建 `v1-implementation-decisions.md`、校正 README 开放项、`git init` 并首次提交。
+- M0 已完成（首次提交 `c22b942`）：决策文档、README 校正、`.gitignore`（projects 边界）、`git init -b main`。
+- 下一步：M1 —— 仓库骨架 + 安装器 + 预设组合（等待发起指令）。
