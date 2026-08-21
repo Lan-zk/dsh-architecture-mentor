@@ -29,7 +29,7 @@
 
 背景研究见 [《AI 时代软件架构师的深度研究》](../AI时代软件架构师的深度研究.md)。
 
-> 注：本文档引用的 `projects/dsh/.agents/` 样本是本地参考材料，按 `projects/README.md` 的约定不进入 git 管理。样本的规范出处是 dsh 上游仓库（deepseek-harness）：`@deepseek-ai/dsh` 包的 repository 字段指向 `github.com/deepseek-ai/deepseek-harness`。
+> 注：仓库维护技能（`.agents/skills/`）由 dsh 上游技能去 dsh 化迁移而来；原始出处为 dsh 上游仓库（deepseek-harness）：`@deepseek-ai/dsh` 包的 repository 字段指向 `github.com/deepseek-ai/deepseek-harness`。
 
 ## 已确认的设计基线
 

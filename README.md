@@ -30,6 +30,5 @@ Then start a DSH session, select the preset named 架构导师, and let `mentor-
 | `.agents/skills/` | Local maintenance skills for doc and program rot. |
 | `preset/` | The installable agent preset. |
 | `scripts/` | Installer, smoke test, and identity generator. |
-| `projects/` | Local reference copies of external projects, not git-managed. |
 
 For Chinese documentation, see [README-zh.md](README-zh.md).

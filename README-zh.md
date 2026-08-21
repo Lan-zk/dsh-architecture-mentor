@@ -30,6 +30,5 @@ node scripts/install.mjs
 | `.agents/skills/` | 本地维护技能（文档/程序腐烂审计）。 |
 | `preset/` | 可安装的智能体预设。 |
 | `scripts/` | 安装器、冒烟测试与身份生成器。 |
-| `projects/` | 外部项目的本地参考副本，不进 git 管理。 |
 
 英文版见 [README.md](README.md)。

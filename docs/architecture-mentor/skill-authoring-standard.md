@@ -1,7 +1,7 @@
 # 导师 Skill 编写规范
 
 > 状态：implemented（已按本规范落地为 `preset/skills/` 下 6 个 SKILL.md；工作区 `.agents/skills/` 覆盖副本同样适用）。
-> 本文把 `projects/dsh/.agents/skills/` 与 `projects/dsh/.agents/notes/` 中观察到的设计手法，转译为架构导师预设 Skill 的编写规则。只借手法，不搬 dsh 的环境绑定实现：pnpm/CI 校验脚本、三语 triplet、路径编码生命周期、`agents/openai.yaml` 均不进入 v1。
+> 本文把 `.agents/skills/` 下本地维护技能（源自 dsh 上游、已去 dsh 化）与 dsh Agent Notes 的设计手法，转译为架构导师预设 Skill 的编写规则。只借手法，不搬 dsh 的环境绑定实现：pnpm/CI 校验脚本、三语 triplet、路径编码生命周期、`agents/openai.yaml` 均不进入 v1。
 
 ## 1. 目的与适用对象
 
@@ -281,7 +281,7 @@ lifecycle: active 且无 evidence_ref  # 缺少证据链的活跃解释
 
 ## 12. 参考依据
 
-观察样本：`projects/dsh/.agents/skills/` 下全部 11 个 SKILL.md（重点：`dsh-archive-agent-notes`、`dsh-code-review`、`dsh-doc-site-sync`、`dsh-prose-standard`、`dsh-trim-cot-leakage`、`dsh-translate-docs`、`dsh-pre-push-checks`）与 `projects/dsh/.agents/notes/`（README.md、archived/AGENTS.md）。借鉴手法清单与来源见 §3 总原则。
+观察样本：`.agents/skills/` 下本地维护技能（`doc-standards`、`prose-standard`、`trim-cot-leakage`、`archive-agent-notes`、`find-simplifications`，均自 dsh 上游去 dsh 化迁移）与 dsh Agent Notes 体系（README.md、archived/AGENTS.md，原始出处见 docs/architecture-mentor/README.md 注）。借鉴手法清单与来源见 §3 总原则。
 
 ## 13. V1 后仍开放
 

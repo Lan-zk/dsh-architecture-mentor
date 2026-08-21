@@ -15,7 +15,7 @@ metadata:
 
 需要显式 `scope`；缺失则报告并停止，不推断全仓库范围。默认 `automatic` 模式；用户明确要求时才进 `interactive`。
 
-始终排除 `projects/**`（外部源码副本，不 git 管理）与 `.agents/notes/archived/`（冻结快照）。
+始终排除 `.agents/notes/archived/`（冻结快照）。
 
 ## 保留完整命题
 

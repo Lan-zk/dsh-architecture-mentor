@@ -1,10 +1,6 @@
 # Node
 node_modules/
 
-# 外部项目源码副本：不进入 git 管理（约定见 projects/README.md）
-projects/*
-!projects/README.md
-
 # 系统杂项
 .DS_Store
 Thumbs.db

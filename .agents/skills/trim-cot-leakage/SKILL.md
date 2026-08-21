@@ -39,8 +39,8 @@ metadata:
 
 ## 工作流
 
-1. 范围与排除按 [prose-standard](../prose-standard/SKILL.md)：显式 scope；不动 `projects/**`、`.agents/notes/archived/`。
-2. 只读审计：跑 [recall batteries](references/recall-batteries.md)（`--hidden`，排除 `.git/` 与 `projects/`），再对最密集散文无模式通读——探针会漏。
+1. 范围与排除按 [prose-standard](../prose-standard/SKILL.md)：显式 scope；不动 `.agents/notes/archived/`。
+2. 只读审计：跑 [recall batteries](references/recall-batteries.md)（`--hidden`，排除 `.git/`），再对最密集散文无模式通读——探针会漏。
 3. 按面修复 owner-first：派生产物 → 改源再生成；模型可见字符串 → 措辞即行为，标快照变更而非静默改写。
 4. 删除前枚举命题并检查 [overcorrection traps](references/examples.md#overcorrection-traps)。
 5. 复跑 batteries 期望只剩 sanctioned keeps；确认每个引用在 HEAD 可解析；运行 `git diff --check`。
