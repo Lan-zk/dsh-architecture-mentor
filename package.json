@@ -7,7 +7,9 @@
     "architecture-mentor-install": "scripts/install.mjs"
   },
   "scripts": {
-    "smoke": "node scripts/smoke-install.mjs"
+    "smoke": "node scripts/smoke-install.mjs",
+    "identity": "node scripts/generate-identity.mjs",
+    "check:identity": "node scripts/generate-identity.mjs --check"
   },
   "engines": {
     "node": ">=18.17"

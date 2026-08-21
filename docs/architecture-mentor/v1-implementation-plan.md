@@ -206,11 +206,11 @@
 
 **任务**
 
-- [ ] 建立单一身份源文件，由 `scripts/generate-identity.mjs`（构建期）生成两份产物：
+- [x] 建立单一身份源文件，由 `scripts/generate-identity.mjs`（构建期）生成两份产物：
   - persona 节（L0，2–4 KB）：精简导师身份 + bootstrap 指引（首会话工作区 AGENTS.md 尚不存在时的兜底）；
   - `templates/AGENTS.md`（L1，目标 ≤ 16 KB，上限 64 KB）：导师人格、原则、八条不变量、三类门禁摘要、技能触发索引（一行一技能）、记录模板指针、契约与 active-context 指针。
-- [ ] 生成脚本确定性输出；生成产物入库，仓库内的改动只发生在源文件。
-- [ ] AGENTS.md 内容纪律（§6）：不放技能执行细节、不放模板全文、不放具体学习记录；写明"不覆盖系统/开发者/直接用户指令"与"门禁由模板必填字段 + 检查流程承载，不靠本文件陈述"。
+- [x] 生成脚本确定性输出；生成产物入库，仓库内的改动只发生在源文件。
+- [x] AGENTS.md 内容纪律（§6）：不放技能执行细节、不放模板全文、不放具体学习记录；写明"不覆盖系统/开发者/直接用户指令"与"门禁由模板必填字段 + 检查流程承载，不靠本文件陈述"。
 
 **交付物**
 
@@ -296,5 +296,6 @@
 - M0 已完成（首次提交 `c22b942`）：决策文档、README 校正、`.gitignore`（projects 边界）、`git init -b main`。
 - M1 已完成（`e6ef66b`）：仓库骨架、`install.mjs` + 冒烟测试（6 项全过）、`agent.cordis.yml`（自官方 `standard` 拷贝裁剪）、`preset.yml`、`VERSION = 0.1.0-rc.1`；真实 DSH 库 `discoverPresets` 验证 `broken: null`，已安装至用户预设根。
 - M2 已完成：工作区模板树 28 个文件（五类记录模板、契约模板、门禁一/二/三映射表、冻结语义、视图模板、`.mentor/workspace.yml`、AGENTS.md 6.5 KB ≤ 16 KB）；门禁字段逐项核对 25/25 覆盖。
-- M3 已完成：6 个 SKILL.md（66–93 行，全部通过 §11 机械自审，见 `m3-skill-self-audit.md`）；本地预设已刷新安装，`discoverPresets` 显示 `broken: null`，技能目录齐备。门禁与写权限内容待人工复核。
-- 下一步：M4 —— 导师身份三层与同源生成。
+- M3 已完成：6 个 SKILL.md（66–93 行，全部通过 §11 机械自审，见 `m3-skill-self-audit.md`）；本地预设已刷新安装，`discoverPresets` 显示 `broken: null`，技能目录齐备。
+- M4 已完成：单一身份源 `preset/src/mentor-identity.md` + `scripts/generate-identity.mjs`（`--check` 防漂移）；persona 2,099 B ≤ 4 KB，AGENTS 4,744 B ≤ 16 KB；两次运行 diff 为空。
+- **V1（M0–M4）构建完成**：仓库骨架 → 安装器与预设组合 → 工作区模板与门禁载体 → 六个技能 → 身份同源生成。M5 试点与 M6 发布按用户决定延后。

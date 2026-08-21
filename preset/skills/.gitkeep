@@ -1,4 +1,0 @@
-# preset/skills
-
-预设内置技能目录（`customSkillDirs` 指向此处）。技能随预设分发并随预设升级；
-工作区 `.agents/skills/` 只是用户覆盖层。

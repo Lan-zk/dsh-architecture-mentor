@@ -30,7 +30,9 @@
 
 # ── identity ────────────────────────────────────────────────────────────────
 
-# L0 精简导师身份：仅覆盖工作区 AGENTS.md 尚不存在时的 bootstrap 场景。
+# L0 精简导师身份：text 由 scripts/generate-identity.mjs 从
+# preset/src/mentor-identity.md 生成；不要手改本块（改动只发生在源文件）。
+# 仅覆盖工作区 AGENTS.md 尚不存在时的 bootstrap 场景。
 # 初始化完成后以工作区 AGENTS.md 为权威人格（工程化设计 §5.3、§6）。
 # `{{model}}` and `{{cwd}}` resolve from the agent's own route and workspace.
 - id: persona
