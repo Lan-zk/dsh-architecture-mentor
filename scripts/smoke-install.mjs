@@ -81,7 +81,7 @@ try {
   step('downgrade refusal', () => {
     rmSync(targetDir, { recursive: true, force: true });
     installPreset({ dshHome, log: silent.log });
-    writeFileSync(path.join(targetDir, 'VERSION'), `${SOURCE_VERSION.split('-')[0]}-zzz-later\n`);
+    writeFileSync(path.join(targetDir, 'VERSION'), '999.0.0\n');
     const result = installPreset({ dshHome, log: silent.log });
     assert.equal(result.status, 'downgrade-refused');
   });
