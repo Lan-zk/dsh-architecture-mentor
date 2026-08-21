@@ -2,7 +2,7 @@
 
 An installable [DSH](https://github.com/deepseek-ai/deepseek-harness) agent preset that turns real engineering work into adaptive architecture-learning experiences. The workspace is not a course: it is a mentor with persistent state, evidence-gated capability calibration, and a lean set of strategy and state skills.
 
-> Status: V1 implemented. npm prerelease published via GitHub Actions; stable release deferred by the owner.
+> Status: V1 implemented. npm stable `0.1.0` published. Pilot validation deferred by the owner.
 
 ## What is included
 
