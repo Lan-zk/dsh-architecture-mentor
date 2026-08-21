@@ -2,7 +2,7 @@
 
 An installable [DSH](https://github.com/deepseek-ai/deepseek-harness) agent preset that turns real engineering work into adaptive architecture-learning experiences. The workspace is not a course: it is a mentor with persistent state, evidence-gated capability calibration, and a lean set of strategy and state skills.
 
-> Status: V1 implemented. Pilot validation and release are deferred by the owner.
+> Status: V1 implemented. npm prerelease `0.1.0-rc.1` published. Pilot validation and stable release are deferred by the owner.
 
 ## What is included
 
@@ -13,6 +13,21 @@ An installable [DSH](https://github.com/deepseek-ai/deepseek-harness) agent pres
 - Same-source identity generation for the L0 persona and the workspace `AGENTS.md`.
 
 ## Quick start
+
+### Install from npm (published)
+
+```sh
+npm exec --yes --package=dsh-architecture-mentor -- architecture-mentor-install
+```
+
+Or install globally:
+
+```sh
+npm i -g dsh-architecture-mentor
+architecture-mentor-install
+```
+
+### Install from source
 
 ```sh
 # From this repository
